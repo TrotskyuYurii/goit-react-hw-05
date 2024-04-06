@@ -2,11 +2,9 @@ import MovieList from "../../components/MovieList/MovieList"
 import css from "./MoviesPage.module.css"
 
 const MoviesPage = ({ searchResult, onSearchClick }) => {
-
-    const handleClick = (event) => {
-
+    const handleSubmit = (event) => {
         event.preventDefault();
-        const searchInputValue = event.target.form.elements.searchInput.value.trim();
+        const searchInputValue = event.target.elements.searchInput.value.trim();
        
         if (searchInputValue === "") {
             return;
@@ -17,13 +15,14 @@ const MoviesPage = ({ searchResult, onSearchClick }) => {
 
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input name="searchInput" type="text" />
-                <button type="submit" onClick={handleClick}>Search</button>
+                <button type="submit">Search</button>
             </form>
             <MovieList movieData={searchResult} />
         </div>
-    )
-}
+    );
+};
+
 
 export default MoviesPage

@@ -6,6 +6,7 @@ import { requestTrandingToday, requestSearch } from "./services/api";
 import HomePage from './pages/HomePage/HomePage'
 import MoviesPage from './pages/MoviesPage/MoviesPage'
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
+import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage'
 
 import css from './app.module.css';
 
@@ -34,7 +35,6 @@ export function App() {
         return;
       }
   
-      // Додайте обробку інших типів запитів тут
   
     } catch (error) {
       setisError(true);
@@ -53,6 +53,8 @@ const onSearchClick = (queryWord) => {
     fetchData('Tranding');
   }, []);
 
+
+
   return (
     <BrowserRouter>
       <div>
@@ -65,6 +67,7 @@ const onSearchClick = (queryWord) => {
         <Routes>
           <Route path="/" element={<HomePage movieData={movieData} />} />
           <Route path="/movies" element={<MoviesPage searchResult={searchResult} onSearchClick={onSearchClick}/>} />
+          <Route path="/movies/:movies/*"element={<MovieDetailsPage />}/>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
