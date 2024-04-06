@@ -1,0 +1,17 @@
+.title{
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.movieCard {
+    display: flex;
+    align-items: flex-start; 
+  }
+  
+  .movieImage {
+    margin-right: 20px; 
+  }
+  
+  .movieDescription {
+    flex: 1; 
+  }

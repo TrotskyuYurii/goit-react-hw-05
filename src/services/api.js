@@ -17,7 +17,6 @@ export const requestTrandingToday = async () => {
   const { data } = await instance.get(
     `/3/trending/movie/day?language=en-US`
   );
-  // console.log(data);
   return data;
 };
 
@@ -26,6 +25,14 @@ export const requestSearch = async (queryWord) => {
   const { data } = await instance.get(
     `/3/search/movie?query=${queryWord}&include_adult=false&language=en-US&page=1`
   );
-// console.log(data);
   return data;
+};
+
+export const requestDetails = async (queryWord) => {
+
+  const { data } = await instance.get(
+    `/3/movie/${queryWord}?language=en-US`
+  );
+  return data;
+
 };

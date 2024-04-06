@@ -7,6 +7,8 @@ import HomePage from './pages/HomePage/HomePage'
 import MoviesPage from './pages/MoviesPage/MoviesPage'
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
 import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage'
+// import MovieCast from './components/MovieCast/MovieCast'
+// import MovieReviews from './components/MovieReviews/MovieReviews'
 
 import css from './app.module.css';
 
@@ -67,7 +69,9 @@ const onSearchClick = (queryWord) => {
         <Routes>
           <Route path="/" element={<HomePage movieData={movieData} />} />
           <Route path="/movies" element={<MoviesPage searchResult={searchResult} onSearchClick={onSearchClick}/>} />
-          <Route path="/movies/:movieId/*"element={<MovieDetailsPage />}/>
+          <Route path="/movies/:movieId/*" element={<MovieDetailsPage />}/>
+            <Route path="/movies/:movieId/cast" element={<MovieDetailsPage />} />
+            <Route path="/movies/:movieId/reviews" element={<MovieDetailsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
