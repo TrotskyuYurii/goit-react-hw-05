@@ -1,4 +1,4 @@
-import { useParams, useLocation, NavLink, Route, Routes } from 'react-router-dom';
+import { useParams, useLocation, NavLink, Route, Routes, Link } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
 
 import { requestDetails } from "../../services/api";
@@ -15,6 +15,8 @@ const MovieDetailsPage = () => {
   const [movieData, setMovieData] = useState(null);
   const [genres, setGenres] = useState(null);
   const [imagePatch, setImagePatch] = useState(null);
+
+  
 
   const fetchData = async (TypeOfQuery, queryWord = '') => {
     try {
@@ -48,7 +50,7 @@ const MovieDetailsPage = () => {
           <p className={css.title}>{movieData?.title}</p>
           <p><b>ID: </b> {movieId}</p>
           <p><b>Release date: </b>{movieData?.release_date}</p>
-          <p><b>vote_average: </b>{movieData?.vote_average}</p>
+          <p><b>Vote average: </b>{movieData?.vote_average}</p>
           <p><b>Overview: </b>{movieData?.overview}</p>
           <p><b>Genres: </b>{genres}</p>
         </div>
