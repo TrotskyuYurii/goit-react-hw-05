@@ -43,7 +43,7 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      <a href={backLinkRef.current}>⬅Go back</a>
+      <Link to={backLinkRef.current}>⬅ Go Back</Link>
       <div className={css.movieCard}>
         <img src={imagePatch} alt={"poster from movie "+movieData?.title} className={css.movieImage}/>
         <div className={css.movieDescription}>
@@ -58,13 +58,13 @@ const MovieDetailsPage = () => {
 
       <p>Additional information</p>
       <ul>
-        <li><NavLink to={`/movies/${movieId}/cast`}>Cast</NavLink></li>
-        <li><NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink></li>
+        <li><Link to="cast">Cast</Link></li>
+        <li><Link to="reviews">Reviews</Link></li>
       </ul>
 
       <Routes>
-        <Route path="/movies/:movieId/cast/*" element={<MovieCast />} />
-        <Route path="/movies/:movieId/reviews/*" element={<MovieReviews />} />
+        <Route path="cast" element={<MovieCast />} />
+        <Route path="reviews" element={<MovieReviews />} />
       </Routes>
     </div>
   );
