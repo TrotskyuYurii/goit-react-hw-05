@@ -36,3 +36,12 @@ export const requestDetails = async (queryWord) => {
   return data;
 
 };
+
+export const requestCast = async (queryWord) => {
+
+  const { data } = await instance.get(
+    `/3/movie/${queryWord}/credits?language=en-US`
+  );
+  return data;
+
+};

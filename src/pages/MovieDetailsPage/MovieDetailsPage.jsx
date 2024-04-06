@@ -1,22 +1,19 @@
-import { useParams, useLocation, NavLink, Route, Routes, Link } from 'react-router-dom';
+import { useParams, useLocation, Route, Routes, Link } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
-
 import { requestDetails } from "../../services/api";
-
 import MovieCast from '../../components/MovieCast/MovieCast';
 import MovieReviews from '../../components/MovieReviews/MovieReviews';
 
 import css from './MovieDetailsPage.module.css';
 
 const MovieDetailsPage = () => {
+  
   const location = useLocation();
   const backLinkRef = useRef(location.state ?? '/');
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
   const [genres, setGenres] = useState(null);
   const [imagePatch, setImagePatch] = useState(null);
-
-  
 
   const fetchData = async (TypeOfQuery, queryWord = '') => {
     try {
@@ -63,7 +60,7 @@ const MovieDetailsPage = () => {
       </ul>
 
       <Routes>
-        <Route path="cast" element={<MovieCast />} />
+        <Route path="cast" element={<MovieCast movieId={movieId}/>} />
         <Route path="reviews" element={<MovieReviews />} />
       </Routes>
     </div>
