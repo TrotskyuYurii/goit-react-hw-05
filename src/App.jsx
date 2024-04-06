@@ -1,17 +1,15 @@
-import { useState,useEffect,Suspense, lazy} from 'react';
-import { NavLink, Route, Routes } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import clsx from "clsx";
 import { requestTrandingToday } from "./services/api";
 
 import HomePage from './pages/HomePage/HomePage'
 
-// import './App.css';
 import css from './app.module.css';
 
 export function App() {
   const [isError, setisError] = useState(false);
   const [movieData, setmovieData] = useState(null);
-
 
   const fetchData = async () => {
     try {
@@ -26,17 +24,24 @@ export function App() {
     }
   };
 
-
   useEffect(() => {
     fetchData();
   }, []);
 
-
   return (
-    <div>
-      <HomePage movieData={movieData}/>
-    </div>
+    <BrowserRouter>
+      <div>
+        <header>
+          <nav className={css.nav}>
+            <NavLink to="/" className={css.navLink}>Home</NavLink>
+          </nav>
+        </header>
+        <Routes>
+          <Route path="/" element={<HomePage movieData={movieData} />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
 
-export default App
+export default App;
