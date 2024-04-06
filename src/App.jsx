@@ -1,34 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState,useEffect,Suspense, lazy} from 'react';
+import { NavLink, Route, Routes } from "react-router-dom";
+import clsx from "clsx";
+import { requestTrandingToday } from "./services/api";
 
-function App() {
-  const [count, setCount] = useState(0)
+import HomePage from './pages/HomePage/HomePage'
+
+import './App.css';
+import css from './app.module.css';
+
+export function App() {
+  const [isError, setisError] = useState(false);
+  const [movieData, setmovieData] = useState(null);
+
+
+  const fetchData = async () => {
+    try {
+      setisError(false);
+      const movieData = await requestTrandingToday();
+      setmovieData(movieData);
+    } catch (error) {
+      setisError(true);
+      console.log('error', error);
+    } finally {
+      setisError(false);
+    }
+  };
+
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <HomePage movieData={movieData}/>
+    </div>
   )
 }
 
