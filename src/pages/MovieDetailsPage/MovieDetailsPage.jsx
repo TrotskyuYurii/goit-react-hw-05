@@ -61,7 +61,7 @@ const MovieDetailsPage = () => {
 
       <Routes>
         <Route path="cast" element={<MovieCast movieId={movieId}/>} />
-        <Route path="reviews" element={<MovieReviews />} />
+        <Route path="reviews" element={<MovieReviews movieId={movieId}/>} />
       </Routes>
     </div>
   );

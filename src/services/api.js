@@ -45,3 +45,13 @@ export const requestCast = async (queryWord) => {
   return data;
 
 };
+
+
+export const requestReviews = async (queryWord) => {
+
+  const { data } = await instance.get(
+    `/3/movie/${queryWord}/reviews?language=en-US&page=1`
+  );
+  return data;
+
+};

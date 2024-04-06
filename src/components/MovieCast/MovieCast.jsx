@@ -17,14 +17,19 @@ const MovieCast = ({ movieId }) => {
     fetchData(movieId);
   }, [movieId]);
 
-  useEffect(() => {
-    if (movieData) {
-      console.log(movieData);
-    }
-  }, [movieData]);
 
   return (
-    <div>MovieCast</div>
+    <div>
+      <ul>
+        {movieData?.cast?.map(actor => (
+          <li key={actor.id}>
+            <img src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt={actor.name} />
+            <p>{actor.name}</p>
+            <p>Character: {actor.character}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
