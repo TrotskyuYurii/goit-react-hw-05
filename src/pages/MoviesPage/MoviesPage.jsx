@@ -1,6 +1,7 @@
+import MovieList from "../../components/MovieList/MovieList"
 import css from "./MoviesPage.module.css"
 
-const MoviesPage = ({ onSearchClick }) => {
+const MoviesPage = ({ searchResult, onSearchClick }) => {
 
     const handleClick = (event) => {
 
@@ -20,6 +21,7 @@ const MoviesPage = ({ onSearchClick }) => {
                 <input name="searchInput" type="text" />
                 <button type="submit" onClick={handleClick}>Search</button>
             </form>
+            <MovieList movieData={searchResult} />
         </div>
     )
 }

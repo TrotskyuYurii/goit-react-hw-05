@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import clsx from "clsx";
-import { requestTrandingToday } from "./services/api";
+import { requestTrandingToday, requestSearch } from "./services/api";
 
 import HomePage from './pages/HomePage/HomePage'
 import MoviesPage from './pages/MoviesPage/MoviesPage'
@@ -14,28 +14,43 @@ import css from './app.module.css';
 export function App() {
   const [isError, setisError] = useState(false);
   const [movieData, setmovieData] = useState(null);
+  const [searchResult, setSearchResult] = useState(null);
 
 
 
-  const fetchData = async () => {
+  const fetchData = async (TypeOfQuery, queryWord='') => {
     try {
       setisError(false);
-      const movieData = await requestTrandingToday();
-      setmovieData(movieData);
+  
+      if (TypeOfQuery === 'Tranding') {
+        const movieData = await requestTrandingToday();
+        setmovieData(movieData);
+        return;
+      }
+
+      if (TypeOfQuery === 'Search') {
+        const movieData = await requestSearch(queryWord);
+        setSearchResult(movieData);
+        return;
+      }
+  
+      // Додайте обробку інших типів запитів тут
+  
     } catch (error) {
       setisError(true);
-      console.log('error', error);
+      console.error('Error occurred:', error);
     } finally {
       setisError(false);
     }
   };
-
-const onSearchClick = (query) => {
   
+
+const onSearchClick = (queryWord) => {
+  fetchData('Search', queryWord);
 }
 
   useEffect(() => {
-    fetchData();
+    fetchData('Tranding');
   }, []);
 
   return (
@@ -49,7 +64,7 @@ const onSearchClick = (query) => {
         </header>
         <Routes>
           <Route path="/" element={<HomePage movieData={movieData} />} />
-          <Route path="/movies" element={<MoviesPage onSearchClick={onSearchClick}/>} />
+          <Route path="/movies" element={<MoviesPage searchResult={searchResult} onSearchClick={onSearchClick}/>} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>

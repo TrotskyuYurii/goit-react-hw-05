@@ -20,3 +20,12 @@ export const requestTrandingToday = async () => {
 
   return data;
 };
+
+export const requestSearch = async (queryWord) => {
+
+  const { data } = await instance.get(
+    `/3/search/movie?query=${queryWord}&include_adult=false&language=en-US&page=1`
+  );
+
+  return data;
+};
