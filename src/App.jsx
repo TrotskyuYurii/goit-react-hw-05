@@ -5,7 +5,7 @@ import { requestTrandingToday } from "./services/api";
 
 import HomePage from './pages/HomePage/HomePage'
 
-import './App.css';
+// import './App.css';
 import css from './app.module.css';
 
 export function App() {
