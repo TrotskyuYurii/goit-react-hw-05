@@ -67,7 +67,7 @@ const onSearchClick = (queryWord) => {
         <Routes>
           <Route path="/" element={<HomePage movieData={movieData} />} />
           <Route path="/movies" element={<MoviesPage searchResult={searchResult} onSearchClick={onSearchClick}/>} />
-          <Route path="/movies/:movies/*"element={<MovieDetailsPage />}/>
+          <Route path="/movies/:movieId/*"element={<MovieDetailsPage />}/>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
