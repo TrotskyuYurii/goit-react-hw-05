@@ -1,0 +1,17 @@
+.container {
+    white-space: wrap; /* Забезпечуємо, щоб елементи не переносилися на новий рядок */
+  }
+  
+  .container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .container li {
+    display: inline-block; 
+    width: 200px; 
+    margin-right: 20px; 
+    vertical-align: top;
+  }
+  

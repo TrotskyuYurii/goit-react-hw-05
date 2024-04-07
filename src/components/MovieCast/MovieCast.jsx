@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { requestCast } from "../../services/api";
 
+import css from './MovieCast.module.css';
+
 const MovieCast = ({ movieId }) => {
   const [movieData, setMovieData] = useState(null);
 
@@ -19,7 +21,7 @@ const MovieCast = ({ movieId }) => {
 
 
   return (
-    <div>
+    <div className={css.container}>
       <ul>
         {movieData?.cast?.map(actor => (
           <li key={actor.id}>
