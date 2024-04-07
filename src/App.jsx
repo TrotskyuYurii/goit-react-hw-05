@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import clsx from "clsx";
 import { requestTrandingToday, requestSearch } from "./services/api";
 
-import HomePage from './pages/HomePage/HomePage'
-import MoviesPage from './pages/MoviesPage/MoviesPage'
-import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
-import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage'
-// import MovieCast from './components/MovieCast/MovieCast'
-// import MovieReviews from './components/MovieReviews/MovieReviews'
+import Loader from './components/Loader/Loader';
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
+const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage/MovieDetailsPage"));
 
 import css from './app.module.css';
 
@@ -21,10 +20,10 @@ export function App() {
 
 
 
-  const fetchData = async (TypeOfQuery, queryWord='') => {
+  const fetchData = async (TypeOfQuery, queryWord = '') => {
     try {
       setisError(false);
-  
+
       if (TypeOfQuery === 'Tranding') {
         const movieData = await requestTrandingToday();
         setmovieData(movieData);
@@ -36,8 +35,8 @@ export function App() {
         setSearchResult(movieData);
         return;
       }
-  
-  
+
+
     } catch (error) {
       setisError(true);
       console.error('Error occurred:', error);
@@ -45,11 +44,11 @@ export function App() {
       setisError(false);
     }
   };
-  
 
-const onSearchClick = (queryWord) => {
-  fetchData('Search', queryWord);
-}
+
+  const onSearchClick = (queryWord) => {
+    fetchData('Search', queryWord);
+  }
 
   useEffect(() => {
     fetchData('Tranding');
@@ -66,12 +65,14 @@ const onSearchClick = (queryWord) => {
             <NavLink to="/movies" className={css.navLink} >movies</NavLink>
           </nav>
         </header>
-        <Routes>
-          <Route path="/" element={<HomePage movieData={movieData} />} />
-          <Route path="/movies" element={<MoviesPage searchResult={searchResult} onSearchClick={onSearchClick}/>} />
-          <Route path="/movies/:movieId/*" element={<MovieDetailsPage />}/>
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<HomePage movieData={movieData} />} />
+            <Route path="/movies" element={<MoviesPage searchResult={searchResult} onSearchClick={onSearchClick} />} />
+            <Route path="/movies/:movieId/*" element={<MovieDetailsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
       </div>
     </BrowserRouter>
   )
