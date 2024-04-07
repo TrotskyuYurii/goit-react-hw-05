@@ -15,3 +15,16 @@
   .movieDescription {
     flex: 1; 
   }
+
+  .backLink{
+    display: flex;
+    padding: 2px 10px;
+    border: 2px solid rgb(199, 199, 199);
+    border-radius: 10px;
+    background-color: transparent;
+    color: black;
+    text-decoration: none;
+    transition: all 0.3s;
+    width: 90px;
+    margin-bottom: 10px;
+  }

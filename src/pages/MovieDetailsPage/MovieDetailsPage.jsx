@@ -22,7 +22,6 @@ const MovieDetailsPage = () => {
         setMovieData(movieData);
         setGenres(movieData.genres.map(genre => genre.name).join(', '));
         setImagePatch(`https://image.tmdb.org/t/p/w500${movieData.poster_path}`);
-        // console.log(movieData);
         return;
       }
     } catch (error) {
@@ -40,7 +39,7 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      <Link to={backLinkRef.current}>⬅ Go Back</Link>
+      <Link className={css.backLink} to={backLinkRef.current}>⬅ Go Back</Link>
       <div className={css.movieCard}>
         <img src={imagePatch} alt={"poster from movie "+movieData?.title} className={css.movieImage}/>
         <div className={css.movieDescription}>

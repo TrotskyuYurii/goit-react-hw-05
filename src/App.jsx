@@ -35,8 +35,6 @@ export function App() {
         setSearchResult(movieData);
         return;
       }
-
-
     } catch (error) {
       setisError(true);
       console.error('Error occurred:', error);
@@ -54,6 +52,14 @@ export function App() {
     fetchData('Tranding');
   }, []);
 
+  const getNavLinkClassName = ({ isActive }) =>
+  clsx(css.navLink, getNavLinkClassName, {
+    [css.active]: isActive,
+  });
+
+
+
+
 
 
   return (
@@ -61,8 +67,8 @@ export function App() {
       <div>
         <header className={css.header}>
           <nav className={css.nav}>
-            <NavLink to="/" className={css.navLink}>Home</NavLink>
-            <NavLink to="/movies" className={css.navLink} >movies</NavLink>
+            <NavLink to="/" className={getNavLinkClassName}>Home</NavLink>
+            <NavLink to="/movies" className={getNavLinkClassName} >movies</NavLink>
           </nav>
         </header>
         <Suspense fallback={<Loader />}>

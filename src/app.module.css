@@ -1,24 +1,24 @@
-
 .nav {
     display: flex;
-    align-items: center;
-    gap: 20px;
+    gap: 10px;
   }
   .navLink {
     display: flex;
-    padding: 15px 20px;
-    border: 1px solid black;
+    padding: 7px 20px;
+    border: 2px solid rgb(199, 199, 199);
+    border-radius: 10px;
     background-color: transparent;
     color: black;
     text-decoration: none;
     transition: all 0.3s;
   }
-  .active {
-    background-color: black;
-    color: white;
-  }
-
+ 
   .header{
     box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
+  }
+
+  .active {
+    background-color: rgb(0, 91, 196);
+    color: white;
   }
