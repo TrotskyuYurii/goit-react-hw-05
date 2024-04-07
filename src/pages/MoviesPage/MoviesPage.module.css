@@ -1,0 +1,10 @@
+.buttonSubmit {
+    padding: 3px 20px;
+    margin-left: 10px;
+    border: 2px solid rgb(199, 199, 199);
+    border-radius: 10px;
+    background-color: transparent;
+    color: black;
+    text-decoration: none;
+    transition: all 0.3s;
+  }

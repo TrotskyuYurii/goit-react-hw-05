@@ -17,7 +17,7 @@ const MoviesPage = ({ searchResult, onSearchClick }) => {
         <div>
             <form onSubmit={handleSubmit}>
                 <input name="searchInput" type="text" />
-                <button type="submit">Search</button>
+                <button type="submit" className={css.buttonSubmit}>Search</button>
             </form>
             <MovieList movieData={searchResult} />
         </div>
