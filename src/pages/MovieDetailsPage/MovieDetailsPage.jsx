@@ -21,7 +21,7 @@ const MovieDetailsPage = () => {
         const movieData = await requestDetails(queryWord);
         setMovieData(movieData);
         setGenres(movieData.genres.map(genre => genre.name).join(', '));
-        setImagePatch(`https://image.tmdb.org/t/p/w500${movieData.poster_path}`);
+        setImagePatch(`https://image.tmdb.org/t/p/w400${movieData.poster_path}`);
         return;
       }
     } catch (error) {
