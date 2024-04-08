@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const MovieList = ({ movieData, backLinkRef }) => {
   
-  console.log(backLinkRef);
+  // console.log(backLinkRef);
 
   if (movieData === null || movieData.results.length === 0) {
     return null;
