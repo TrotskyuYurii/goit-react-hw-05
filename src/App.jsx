@@ -63,7 +63,6 @@ export function App() {
 
 
   return (
-    <BrowserRouter>
       <div>
         <header className={css.header}>
           <nav className={css.nav}>
@@ -80,7 +79,6 @@ export function App() {
           </Routes>
         </Suspense>
       </div>
-    </BrowserRouter>
   )
 }
 
