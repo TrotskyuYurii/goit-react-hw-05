@@ -1,10 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const MovieList = ({ movieData }) => {
-  if (!movieData) {
-    return <div><h3>Start searching for your movies 😊</h3></div>;
-  } else if (movieData.results.length === 0) {
-    return <div><h3>Sorry, there are no movies found 😒</h3></div>;
+  if (movieData===null || movieData.results.length === 0) {
+    return null;
   }
 
   return (

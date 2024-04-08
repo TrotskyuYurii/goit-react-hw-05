@@ -1,8 +1,12 @@
 import { useLocation, Link } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
 import { requestSearch } from '../../services/api';
+
+import MoveListMessage from '../../components/MoveListMessage/MoveListMessage';
 import MovieList from "../../components/MovieList/MovieList";
+
 import css from "./MoviesPage.module.css";
+
 
 const MoviesPage = () => {
     const location = useLocation();
@@ -37,7 +41,8 @@ const MoviesPage = () => {
                 <input name="searchInput" type="text" />
                 <button type="submit" className={css.buttonSubmit}>Search</button>
             </form>
-            <MovieList movieData={searchResult} />
+            <MovieList movieData={searchResult}/>
+            {searchResult === null || movieData.results.length === 0 && <MoveListMessage movieData={searchResult} />}
         </div>
     );
 };
