@@ -1,4 +1,5 @@
-import { useParams, useLocation, Route, Routes, Link } from 'react-router-dom';
+// MovieDetailsPage.jsx
+import { useParams, useLocation, Link, Routes, Route } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
 import { requestDetails } from "../../services/api";
 import MovieCast from '../../components/MovieCast/MovieCast';
@@ -9,7 +10,8 @@ import css from './MovieDetailsPage.module.css';
 const MovieDetailsPage = () => {
   
   const location = useLocation();
-  const backLinkRef = useRef(location.state ?? '/');
+  const backLinkRef = useRef(location.state?.from ?? '/');
+
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
   const [genres, setGenres] = useState(null);
@@ -32,10 +34,6 @@ const MovieDetailsPage = () => {
   useEffect(() => {
     fetchData('details', movieId);
   }, [movieId]);
-
-
-
-
 
   return (
     <div>
