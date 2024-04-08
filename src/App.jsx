@@ -12,7 +12,7 @@ const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage/MovieDetail
 
 
 export function App() {
-  const [isError, setisError] = useState(false);
+
   const [movieData, setmovieData] = useState(null);
   const [searchResult, setSearchResult] = useState(null);
 
@@ -20,13 +20,6 @@ export function App() {
 
   const fetchData = async (TypeOfQuery, queryWord = '') => {
     try {
-      setisError(false);
-
-      if (TypeOfQuery === 'Tranding') {
-        const movieData = await requestTrandingToday();
-        setmovieData(movieData);
-        return;
-      }
 
       if (TypeOfQuery === 'Search') {
         const movieData = await requestSearch(queryWord);
@@ -34,10 +27,8 @@ export function App() {
         return;
       }
     } catch (error) {
-      setisError(true);
       console.error('Error occurred:', error);
     } finally {
-      setisError(false);
     }
   };
 
