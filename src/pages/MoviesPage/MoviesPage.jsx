@@ -28,7 +28,7 @@ const MoviesPage = () => {
         if (searchInputValue) {
             fetchData(searchInputValue);
         }
-    })
+    },[searchInputValue])
 
     return (
         <div>

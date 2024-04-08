@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const MovieList = ({ movieData }) => {
   if (!movieData) {
@@ -12,7 +12,7 @@ const MovieList = ({ movieData }) => {
       <ul>
         {movieData.results.map(movie => (
           <li key={movie.id}>
-            <NavLink to={`/movies/${movie.id}`}>{movie.title}</NavLink>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
           </li>
         ))}
       </ul>
