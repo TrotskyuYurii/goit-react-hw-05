@@ -42,7 +42,7 @@ const MoviesPage = () => {
                 <button type="submit" className={css.buttonSubmit}>Search</button>
             </form>
             <MovieList movieData={searchResult}/>
-            {searchResult === null || movieData.results.length === 0 && <MoveListMessage movieData={searchResult} />}
+            {searchResult === null || searchResult.results.length === 0 && <MoveListMessage movieData={searchResult} />}
         </div>
     );
 };
