@@ -1,6 +1,5 @@
-import { useState, useEffect, Suspense, lazy } from 'react';
-import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
-import { requestTrandingToday, requestSearch } from "./services/api";
+import { Suspense, lazy } from 'react';
+import {Route, Routes } from "react-router-dom";
 
 import Loader from './components/Loader/Loader';
 import Navigation from './components/Navigation/Navigation';
@@ -13,39 +12,13 @@ const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage/MovieDetail
 
 export function App() {
 
-  const [movieData, setmovieData] = useState(null);
-  const [searchResult, setSearchResult] = useState(null);
-
-
-
-  const fetchData = async (queryWord) => {
-    try {
-
-        const movieData = await requestSearch(queryWord);
-        setSearchResult(movieData);
-
-    } catch (error) {
-      console.error('Error occurred:', error);
-    } finally {
-    }
-  };
-
-
-  const onSearchClick = (queryWord) => {
-    fetchData( queryWord);
-  }
-
-
-
-
-
   return (
       <div>
         <Navigation />
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/movies" element={<MoviesPage searchResult={searchResult} onSearchClick={onSearchClick} />} />
+            <Route path="/movies" element={<MoviesPage />} />
             <Route path="/movies/:movieId/*" element={<MovieDetailsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

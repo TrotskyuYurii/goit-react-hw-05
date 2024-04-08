@@ -1,26 +1,34 @@
-import { useLocation } from 'react-router-dom';
-import { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
+import { useRef, useState, useEffect } from 'react';
+import { requestSearch } from '../../services/api';
+import MovieList from "../../components/MovieList/MovieList";
+import css from "./MoviesPage.module.css";
 
-import MovieList from "../../components/MovieList/MovieList"
-
-import css from "./MoviesPage.module.css"
-
-const MoviesPage = ({ searchResult, onSearchClick }) => {
-
+const MoviesPage = () => {
     const location = useLocation();
     const backLinkRef = useRef(location.state ?? '/');
+    const [searchResult, setSearchResult] = useState(null);
+    const [searchInputValue, setSearchInputValue] = useState('');
+
+    const fetchData = async (queryWord) => {
+        try {
+            setSearchResult(await requestSearch(queryWord));
+        } catch (error) {
+            console.error('Error occurred:', error);
+        }
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const searchInputValue = event.target.elements.searchInput.value.trim();
-       
-        if (searchInputValue === "") {
-            return;
-        }
-
-        onSearchClick(searchInputValue);
+        const inputValue = event.target.elements.searchInput.value.trim();
+        setSearchInputValue(inputValue);
     };
+
+    useEffect(() => {
+        if (searchInputValue) {
+            fetchData(searchInputValue);
+        }
+    })
 
     return (
         <div>
@@ -34,5 +42,4 @@ const MoviesPage = ({ searchResult, onSearchClick }) => {
     );
 };
 
-
-export default MoviesPage
+export default MoviesPage;
