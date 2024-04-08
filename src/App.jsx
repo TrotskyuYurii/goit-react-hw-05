@@ -18,14 +18,12 @@ export function App() {
 
 
 
-  const fetchData = async (TypeOfQuery, queryWord = '') => {
+  const fetchData = async (queryWord) => {
     try {
 
-      if (TypeOfQuery === 'Search') {
         const movieData = await requestSearch(queryWord);
         setSearchResult(movieData);
-        return;
-      }
+
     } catch (error) {
       console.error('Error occurred:', error);
     } finally {
@@ -34,7 +32,7 @@ export function App() {
 
 
   const onSearchClick = (queryWord) => {
-    fetchData('Search', queryWord);
+    fetchData( queryWord);
   }
 
 
