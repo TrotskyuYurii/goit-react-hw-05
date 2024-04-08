@@ -1,15 +1,15 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
-import clsx from "clsx";
 import { requestTrandingToday, requestSearch } from "./services/api";
 
 import Loader from './components/Loader/Loader';
+import Navigation from './components/Navigation/Navigation';
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage/MovieDetailsPage"));
 
-import css from './app.module.css';
+// import css from './app.module.css';
 
 
 
@@ -52,10 +52,7 @@ export function App() {
     fetchData('Tranding');
   }, []);
 
-  const getNavLinkClassName = ({ isActive }) =>
-  clsx(css.navLink, getNavLinkClassName, {
-    [css.active]: isActive,
-  });
+
 
 
 
@@ -64,12 +61,7 @@ export function App() {
 
   return (
       <div>
-        <header className={css.header}>
-          <nav className={css.nav}>
-            <NavLink to="/" className={getNavLinkClassName}>Home</NavLink>
-            <NavLink to="/movies" className={getNavLinkClassName} >movies</NavLink>
-          </nav>
-        </header>
+        <Navigation />
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<HomePage movieData={movieData} />} />
