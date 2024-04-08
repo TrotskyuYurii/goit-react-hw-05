@@ -9,8 +9,6 @@ const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage/MovieDetailsPage"));
 
-// import css from './app.module.css';
-
 
 
 export function App() {
@@ -48,13 +46,6 @@ export function App() {
     fetchData('Search', queryWord);
   }
 
-  useEffect(() => {
-    fetchData('Tranding');
-  }, []);
-
-
-
-
 
 
 
@@ -64,7 +55,7 @@ export function App() {
         <Navigation />
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/" element={<HomePage movieData={movieData} />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/movies" element={<MoviesPage searchResult={searchResult} onSearchClick={onSearchClick} />} />
             <Route path="/movies/:movieId/*" element={<MovieDetailsPage />} />
             <Route path="*" element={<NotFoundPage />} />
