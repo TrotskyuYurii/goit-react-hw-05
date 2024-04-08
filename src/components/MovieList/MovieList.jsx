@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const MovieList = ({ movieData }) => {
   if (movieData===null || movieData.results.length === 0) {
@@ -6,7 +6,6 @@ const MovieList = ({ movieData }) => {
   }
 
   return (
-    <div>
       <ul>
         {movieData.results.map(movie => (
           <li key={movie.id}>
@@ -14,7 +13,6 @@ const MovieList = ({ movieData }) => {
           </li>
         ))}
       </ul>
-    </div>
   );
 };
 
