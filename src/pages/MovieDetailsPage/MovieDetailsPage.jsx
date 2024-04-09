@@ -1,14 +1,16 @@
-// MovieDetailsPage.jsx
 import { useParams, useLocation, Link, Routes, Route } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
+import { Suspense, lazy } from 'react';
 import { requestDetails } from "../../services/api";
-import MovieCast from '../../components/MovieCast/MovieCast';
-import MovieReviews from '../../components/MovieReviews/MovieReviews';
-
+// import MovieCast from '../../components/MovieCast/MovieCast';
+// import MovieReviews from '../../components/MovieReviews/MovieReviews';
+import Loader from '../../components/Loader/Loader';
+const MovieCast = lazy(() => import("../../components/MovieCast/MovieCast"));
+const MovieReviews = lazy(() => import("../../components/MovieReviews/MovieReviews"));
 import css from './MovieDetailsPage.module.css';
 
 const MovieDetailsPage = () => {
-  
+
   const location = useLocation();
   const backLinkRef = useRef(location.state?.from ?? '/');
 
@@ -39,7 +41,7 @@ const MovieDetailsPage = () => {
     <div>
       <Link className={css.backLink} to={backLinkRef.current}>⬅ Go Back</Link>
       <div className={css.movieCard}>
-        <img src={imagePatch} alt={"poster from movie "+movieData?.title} className={css.movieImage}/>
+        <img src={imagePatch} alt={"poster from movie " + movieData?.title} className={css.movieImage} />
         <div className={css.movieDescription}>
           <p className={css.title}>{movieData?.title}</p>
           <p><b>ID: </b> {movieId}</p>
@@ -56,10 +58,12 @@ const MovieDetailsPage = () => {
         <li><Link to="reviews">Reviews</Link></li>
       </ul>
 
-      <Routes>
-        <Route path="cast" element={<MovieCast />} />
-        <Route path="reviews" element={<MovieReviews />} />
-      </Routes>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="cast" element={<MovieCast />} />
+          <Route path="reviews" element={<MovieReviews />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 };

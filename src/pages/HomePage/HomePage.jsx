@@ -23,7 +23,7 @@ const HomePage = () => {
 
   return (
     <div className={css.MovieListingWrap}>
-      <h2>Тренди сьогодні</h2>
+      <h2>Tranding today</h2>
       <MovieList movieData={movieData} backLinkRef={location}/>
     </div>
   );
