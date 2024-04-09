@@ -1,17 +1,14 @@
-import { useRef, useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { requestSearch } from '../../services/api';
-
 import MoveListMessage from '../../components/MoveListMessage/MoveListMessage';
 import MovieList from "../../components/MovieList/MovieList";
-
 import css from "./MoviesPage.module.css";
-
 
 const MoviesPage = () => {
     const location = useLocation();
     const [searchResult, setSearchResult] = useState(null);
-    const [searchInputValue, setSearchInputValue] = useState('');
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const fetchData = async (queryWord) => {
         try {
@@ -23,25 +20,24 @@ const MoviesPage = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const inputValue = event.target.elements.searchInput.value.trim();
-        setSearchInputValue(inputValue);
+        setSearchParams({ query: event.target.elements.searchInput.value.trim() });
     };
 
     useEffect(() => {
-        if (searchInputValue) {
-            fetchData(searchInputValue);
+        const queryWord = searchParams.get('query');
+        if (queryWord) {
+            fetchData(queryWord);
         }
-    },[searchInputValue])
+    }, [searchParams])
 
     return (
         <div>
-            {/* <Link className={css.backLink} to={backLinkRef.current}>⬅ Go Back</Link> */}
             <form onSubmit={handleSubmit}>
-                <input name="searchInput" type="text" />
+                <input name="searchInput" type="text" defaultValue={searchParams.get('query') || ''} />
                 <button type="submit" className={css.buttonSubmit}>Search</button>
             </form>
-            <MovieList movieData={searchResult} backLinkRef={location}/>
-            {searchResult === null || searchResult.results.length === 0 && <MoveListMessage movieData={searchResult} />}
+            <MovieList movieData={searchResult} backLinkRef={location} />
+            {(searchResult === null || searchResult.results.length === 0) && <MoveListMessage movieData={searchResult} />}
         </div>
     );
 };
