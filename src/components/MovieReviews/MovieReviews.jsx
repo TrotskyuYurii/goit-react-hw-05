@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { requestReviews } from "../../services/api";
+import { useParams } from 'react-router-dom';
 
-const MovieReviews = ({movieId}) => {
+const MovieReviews = ({}) => {
+
+  const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
 
   const fetchData = async (queryWord = '') => {

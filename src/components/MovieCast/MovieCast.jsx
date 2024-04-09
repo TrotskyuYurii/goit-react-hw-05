@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { requestCast } from "../../services/api";
 
 import css from './MovieCast.module.css';
 
-const MovieCast = ({ movieId }) => {
+const MovieCast = ({ }) => {
+  
+  const { movieId } = useParams();
+
   const [movieData, setMovieData] = useState(null);
 
   const fetchData = async (queryWord = '') => {
